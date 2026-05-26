@@ -1,0 +1,50 @@
+{
+  "schema": "Aushang",
+  "valid": [
+    {
+      "id": "aushang-001",
+      "adresse": "Hauptstraße 10, 04420 Markranstädt",
+      "kalenderwoche": 24,
+      "jahr": 2026,
+      "auftragIds": ["auftrag-001", "auftrag-002"],
+      "erstelltAm": "2026-05-26T10:00:00.000Z"
+    },
+    {
+      "id": "aushang-002",
+      "adresse": "Bahnhofstraße 5",
+      "kalenderwoche": 24,
+      "jahr": 2026,
+      "auftragIds": ["auftrag-100", "auftrag-101", "auftrag-102"],
+      "erstelltAm": "2026-05-26T10:00:00.000Z",
+      "bestaetigt": true,
+      "bestaetigtAm": "2026-06-08T09:30:00.000Z",
+      "bestaetigtVonMonteurId": "monteur-01",
+      "pdfPath": "blob://anwohnerinfo/aushang-002.pdf"
+    }
+  ],
+  "invalid": [
+    {
+      "id": "x",
+      "adresse": "Hauptstr 1",
+      "kalenderwoche": 24,
+      "jahr": 2026,
+      "auftragIds": ["auftrag-001"],
+      "erstelltAm": "2026-05-26T10:00:00.000Z"
+    },
+    {
+      "id": "x",
+      "adresse": "",
+      "kalenderwoche": 24,
+      "jahr": 2026,
+      "auftragIds": ["a", "b"],
+      "erstelltAm": "2026-05-26T10:00:00.000Z"
+    },
+    {
+      "id": "x",
+      "adresse": "Hauptstr 1",
+      "kalenderwoche": 24,
+      "jahr": 2026,
+      "auftragIds": ["a", "b"]
+    }
+  ]
+}

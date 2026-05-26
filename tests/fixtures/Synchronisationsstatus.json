@@ -1,0 +1,11 @@
+{
+  "schema": "Synchronisationsstatus",
+  "valid": [
+    "lokal",
+    "in_uebertragung",
+    "synchronisiert",
+    "konflikt",
+    "fehlgeschlagen"
+  ],
+  "invalid": ["sync", "pending", "", null]
+}

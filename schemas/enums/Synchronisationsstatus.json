@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Synchronisationsstatus",
+  "title": "Synchronisationsstatus",
+  "description": "Client <-> server sync state for offline-capable Monteur tablets (disposition-web-app). Phase 2 introduces HLC-based conflict resolution; this enum is the wire-format.",
+  "type": "string",
+  "enum": [
+    "lokal",
+    "in_uebertragung",
+    "synchronisiert",
+    "konflikt",
+    "fehlgeschlagen"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Monteur",
+  "title": "Monteur",
+  "description": "A technician (Monteur) executing meter-change jobs. The optional passwortHash field is only used by disposition-web-app for offline tablet login; freitag-webapp persists Monteure without it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "email", "aktiv"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable identifier. UUID v4 in freitag-webapp (Postgres), MongoDB ObjectId-string in disposition-web-app."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Display name; not unique."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Login identifier; unique per Monteur."
+    },
+    "telefon": {
+      "type": ["string", "null"],
+      "description": "Contact phone, optional."
+    },
+    "passwortHash": {
+      "type": ["string", "null"],
+      "description": "Salted password hash (ASP.NET PasswordHasher format). Set only in disposition-web-app since Phase 0. Must NEVER be exposed in JSON responses — implementations must use @JsonIgnore / DTO projection."
+    },
+    "aktiv": {
+      "type": "boolean",
+      "description": "Whether the Monteur can be assigned new orders."
+    },
+    "erstelltAm": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Server-set creation timestamp (UTC, ISO 8601)."
+    }
+  }
+}

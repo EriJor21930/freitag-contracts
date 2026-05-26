@@ -1,0 +1,76 @@
+{
+  "schema": "Zaehlerwechsel",
+  "valid": [
+    {
+      "id": "wechsel-001",
+      "auftragId": "auftrag-001",
+      "monteurId": "monteur-01",
+      "abgeschlossenAm": "2026-05-26T11:30:00.000Z"
+    },
+    {
+      "id": "wechsel-002",
+      "auftragId": "auftrag-002",
+      "idfNr": "IDF-12345",
+      "monteurId": "monteur-01",
+      "monteurName": "Max Mustermann",
+      "alterZaehler": {
+        "zaehlerNr": "OLD-12345",
+        "geraeteTyp": "Ferraris ZD3",
+        "ablesungHT": "001234.5",
+        "ablesungNT": "000567.8"
+      },
+      "neuerZaehler": {
+        "zaehlerNr": "NEW-99999",
+        "geraeteTyp": "Smart-Meter v3",
+        "anfangsstandHT": "0",
+        "anfangsstandNT": "0"
+      },
+      "anfahrten": [
+        {
+          "zeitpunkt": "2026-05-26T09:00:00.000Z",
+          "zugangErfolgreich": false,
+          "keinZugangGrund": "Bewohner nicht zu Hause",
+          "fotoPfade": ["blob://photos/anfahrt1.jpg"]
+        },
+        {
+          "zeitpunkt": "2026-05-26T11:00:00.000Z",
+          "zugangErfolgreich": true
+        }
+      ],
+      "zaehlerFotoPfad": "blob://photos/zaehler.jpg",
+      "neueZaehlerFotoPfade": ["blob://photos/neu-1.jpg"],
+      "unterschriftPfad": "blob://signatures/auftrag-002.png",
+      "bemerkung": "Wechsel ohne Zwischenfall",
+      "abgeschlossenAm": "2026-05-26T11:30:00.000Z",
+      "dokumentationsStatus": "vollstaendig",
+      "synchronisationsStatus": "synchronisiert",
+      "synchronisiertAm": "2026-05-26T11:35:00.000Z"
+    }
+  ],
+  "invalid": [
+    {
+      "id": "x",
+      "monteurId": "m",
+      "abgeschlossenAm": "2026-05-26T11:30:00.000Z"
+    },
+    {
+      "id": "x",
+      "auftragId": "a",
+      "monteurId": "m",
+      "abgeschlossenAm": "2026-05-26T11:30:00.000Z",
+      "anfahrten": [
+        { "zeitpunkt": "2026-05-26T09:00:00.000Z" },
+        { "zeitpunkt": "2026-05-26T10:00:00.000Z" },
+        { "zeitpunkt": "2026-05-26T11:00:00.000Z" },
+        { "zeitpunkt": "2026-05-26T12:00:00.000Z" }
+      ]
+    },
+    {
+      "id": "x",
+      "auftragId": "a",
+      "monteurId": "m",
+      "abgeschlossenAm": "2026-05-26T11:30:00.000Z",
+      "dokumentationsStatus": "complete"
+    }
+  ]
+}

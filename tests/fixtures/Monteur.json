@@ -1,0 +1,33 @@
+{
+  "schema": "Monteur",
+  "valid": [
+    {
+      "id": "01HPK1A2B3C4D5E6F7G8H9JKLM",
+      "name": "Max Mustermann",
+      "email": "max@freitag-elektrobau.de",
+      "telefon": "+49 341 12345",
+      "aktiv": true,
+      "erstelltAm": "2026-01-15T08:00:00.000Z"
+    },
+    {
+      "id": "01HPK1A2B3C4D5E6F7G8H9JKLN",
+      "name": "Anna Schmidt",
+      "email": "anna@freitag-elektrobau.de",
+      "telefon": null,
+      "passwortHash": "AQAAAAEAACcQAAAAEHv...",
+      "aktiv": true
+    }
+  ],
+  "invalid": [
+    { "id": "x", "name": "", "email": "max@freitag.de", "aktiv": true },
+    { "id": "x", "name": "Max", "email": "not-an-email", "aktiv": true },
+    { "id": "x", "name": "Max", "email": "max@freitag.de" },
+    {
+      "id": "x",
+      "name": "Max",
+      "email": "max@freitag.de",
+      "aktiv": true,
+      "rolle": "admin"
+    }
+  ]
+}

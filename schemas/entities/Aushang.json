@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Aushang",
+  "title": "Aushang",
+  "description": "Public notice for residents of a multi-family house (MFH) announcing meter-change appointments. Created automatically when ≥2 Aufträge target the same address in the same week. Currently described in AUSHANG-LOGIK.md but not implemented; this schema is greenfield-design.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "adresse", "kalenderwoche", "jahr", "auftragIds", "erstelltAm"],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "adresse": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Building address; primary key together with kalenderwoche+jahr."
+    },
+    "kalenderwoche": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 53,
+      "description": "ISO calendar week. Aushang is generated for week+2 (per AUSHANG-LOGIK.md)."
+    },
+    "jahr": {
+      "type": "integer",
+      "minimum": 2024,
+      "maximum": 2100
+    },
+    "auftragIds": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 2,
+      "description": "All Aufträge that share this address in the week. minItems=2 enforces the MFH-only rule."
+    },
+    "erstelltAm": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "bestaetigt": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether a Monteur has confirmed the Aushang was posted on-site."
+    },
+    "bestaetigtAm": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "bestaetigtVonMonteurId": {
+      "type": ["string", "null"]
+    },
+    "pdfPath": {
+      "type": ["string", "null"],
+      "description": "Blob storage path to the generated Anwohnerinfo PDF."
+    }
+  }
+}

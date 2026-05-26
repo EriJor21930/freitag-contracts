@@ -1,0 +1,5 @@
+{
+  "schema": "Dokumentationsstatus",
+  "valid": ["unvollstaendig", "in_pruefung", "vollstaendig", "abgelehnt"],
+  "invalid": ["complete", "VOLLSTAENDIG", "", null]
+}

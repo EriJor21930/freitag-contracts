@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Zaehlerwechsel",
+  "title": "Zaehlerwechsel",
+  "description": "Result record of a completed meter change. Semantically a closed Auftrag with the old/new meter readings, signature, photos. In disposition-web-app stored in collection 'wechselliste_YYYY' (WechsellisteModel). In freitag-webapp stored in 'montage_ergebnisse' Mongo collection (Phase 2.5 will migrate to Postgres).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "auftragId", "monteurId", "abgeschlossenAm"],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "auftragId": {
+      "type": "string",
+      "description": "Foreign key to Auftrag.id."
+    },
+    "idfNr": {
+      "type": ["string", "null"]
+    },
+    "monteurId": {
+      "type": "string"
+    },
+    "monteurName": {
+      "type": ["string", "null"],
+      "description": "Denormalized; source of truth is Monteur.name."
+    },
+    "alterZaehler": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "zaehlerNr": { "type": ["string", "null"] },
+        "geraeteTyp": { "type": ["string", "null"] },
+        "ablesungHT": { "type": ["string", "null"], "description": "Reading high-tariff (180)" },
+        "ablesungNT": { "type": ["string", "null"], "description": "Reading low-tariff (182)" },
+        "ablesungBezug": { "type": ["string", "null"], "description": "Reading 181 (Bezug counter, if 3-tariff)" }
+      }
+    },
+    "neuerZaehler": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "zaehlerNr": { "type": ["string", "null"] },
+        "geraeteTyp": { "type": ["string", "null"] },
+        "anfangsstandHT": { "type": ["string", "null"] },
+        "anfangsstandNT": { "type": ["string", "null"] }
+      }
+    },
+    "anfahrten": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["zeitpunkt"],
+        "properties": {
+          "zeitpunkt": { "type": "string", "format": "date-time" },
+          "zugangErfolgreich": { "type": "boolean" },
+          "keinZugangGrund": { "type": ["string", "null"] },
+          "fotoPfade": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Blob storage paths for 'kein Zugang' photos."
+          }
+        }
+      }
+    },
+    "zaehlerFotoPfad": {
+      "type": ["string", "null"]
+    },
+    "neueZaehlerFotoPfade": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unterschriftPfad": {
+      "type": ["string", "null"]
+    },
+    "bemerkung": {
+      "type": ["string", "null"]
+    },
+    "abgeschlossenAm": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dokumentationsStatus": {
+      "$ref": "Dokumentationsstatus"
+    },
+    "synchronisationsStatus": {
+      "$ref": "Synchronisationsstatus"
+    },
+    "synchronisiertAm": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    }
+  }
+}

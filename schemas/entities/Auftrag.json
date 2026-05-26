@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Auftrag",
+  "title": "Auftrag",
+  "description": "A meter-change work order. Shared contract between freitag-webapp (source of truth in Postgres), disposition-web-app (offline-synced subset), and serviceportal (customer-facing view).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "adresse", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable identifier. UUID v4 in freitag-webapp, string in disposition-web-app."
+    },
+    "idfNr": {
+      "type": ["string", "null"],
+      "description": "External IDF number (network operator reference, used in serviceportal lookup)."
+    },
+    "adresse": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Single-line postal address."
+    },
+    "lat": {
+      "type": ["number", "string", "null"],
+      "description": "Latitude. Postgres-Drizzle stores as decimal-string; numeric clients accept both."
+    },
+    "lon": {
+      "type": ["number", "string", "null"],
+      "description": "Longitude. Same shape constraint as lat."
+    },
+    "zaehlerNummer": {
+      "type": ["string", "null"],
+      "description": "Meter number. Canonical naming: camelCase with German umlaut transliteration (ae). disposition-web-app legacy field 'zaehlerNr' maps here; freitag-webapp legacy 'zahlernummer' maps here."
+    },
+    "kundenname": {
+      "type": ["string", "null"],
+      "description": "Customer name. disposition-web-app uses 'kundenname'; freitag-webapp uses 'verbrauchername'. Choose one canonical name."
+    },
+    "zaehlpunktbezeichnung": {
+      "type": ["string", "null"]
+    },
+    "zaehlerstandort": {
+      "type": ["string", "null"]
+    },
+    "sperrzeitraumVon": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Period during which the meter must not be changed (start). Only used by freitag-webapp scheduling."
+    },
+    "sperrzeitraumBis": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "status": {
+      "$ref": "Auftragsstatus"
+    },
+    "monteurId": {
+      "type": ["string", "null"],
+      "description": "Assigned Monteur. null = unassigned."
+    },
+    "wechseldatum": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Actual completion date (set when status transitions to 'abgeschlossen')."
+    },
+    "wechseldatumPlan": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Planned date while in 'geplant' or 'in_arbeit'."
+    },
+    "wechselzeitVon": {
+      "type": ["string", "null"],
+      "description": "Planned time window start, format HH:MM (e.g. '07:00')."
+    },
+    "wechselzeitBis": {
+      "type": ["string", "null"],
+      "description": "Planned time window end."
+    },
+    "kalenderwoche": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 53
+    },
+    "erstelltAm": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    }
+  }
+}

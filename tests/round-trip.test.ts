@@ -102,6 +102,14 @@ try {
 const fixtures = loadFixtures();
 const jsonSchemas = loadJsonSchemas();
 
+// Register every schema by $id so cross-schema $ref resolves
+// (e.g. Auftrag.status references Auftragsstatus).
+for (const [id, schema] of jsonSchemas) {
+  if (!ajv.getSchema(id)) {
+    ajv.addSchema(schema as object, id);
+  }
+}
+
 describe("Round-Trip Contract Test (ajv ↔ zod)", () => {
   it("has at least one JSON schema loaded", () => {
     // TDD RED expectation: this fails until Plan 01-03 adds the first schema.
@@ -129,15 +137,17 @@ describe("Round-Trip Contract Test (ajv ↔ zod)", () => {
       expect(jsonSchema, `JSON schema ${fx.schemaId} not found`).toBeDefined();
       expect(zodSchema, `Zod schema ${fx.schemaId} not found`).toBeDefined();
 
-      const ajvValidate = ajv.compile(jsonSchema as object);
-      const ajvOk = ajvValidate(fx.payload);
+      // Use the pre-registered schema by $id so $ref resolution works.
+      const ajvValidate = ajv.getSchema(fx.schemaId);
+      expect(ajvValidate, `ajv schema ${fx.schemaId} not compiled`).toBeDefined();
+      const ajvOk = ajvValidate!(fx.payload);
 
       const zodResult = zodSchema!.safeParse(fx.payload);
       const zodOk = zodResult.success;
 
       expect(
         ajvOk,
-        `ajv: expected ${fx.shouldPass ? "valid" : "invalid"}, got errors: ${JSON.stringify(ajvValidate.errors)}`
+        `ajv: expected ${fx.shouldPass ? "valid" : "invalid"}, got errors: ${JSON.stringify(ajvValidate!.errors)}`
       ).toBe(fx.shouldPass);
 
       expect(

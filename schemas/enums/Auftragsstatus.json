@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Auftragsstatus",
+  "title": "Auftragsstatus",
+  "description": "Lifecycle state of an Auftrag (work order). Sourced from freitag-webapp shared/schema.ts.",
+  "type": "string",
+  "enum": ["offen", "geplant", "in_arbeit", "abgeschlossen"]
+}

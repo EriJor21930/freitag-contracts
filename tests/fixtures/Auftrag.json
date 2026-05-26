@@ -1,0 +1,51 @@
+{
+  "schema": "Auftrag",
+  "valid": [
+    {
+      "id": "auftrag-001",
+      "adresse": "Hauptstraße 10, 04420 Markranstädt",
+      "status": "offen"
+    },
+    {
+      "id": "auftrag-002",
+      "idfNr": "IDF-12345",
+      "adresse": "Bahnhofstraße 5, 04420 Markranstädt",
+      "lat": 51.3,
+      "lon": 12.2,
+      "zaehlerNummer": "Z-001-2026",
+      "kundenname": "Schmidt, Anna",
+      "status": "geplant",
+      "monteurId": "monteur-01",
+      "wechseldatumPlan": "2026-05-30",
+      "wechselzeitVon": "08:00",
+      "wechselzeitBis": "10:00",
+      "kalenderwoche": 22
+    },
+    {
+      "id": "auftrag-003",
+      "adresse": "Hauptstraße 10",
+      "lat": "51.30123",
+      "lon": "12.22456",
+      "status": "abgeschlossen",
+      "wechseldatum": "2026-05-26"
+    }
+  ],
+  "invalid": [
+    { "id": "x", "adresse": "Test", "status": "OFFEN" },
+    { "adresse": "Test", "status": "offen" },
+    { "id": "x", "status": "offen" },
+    { "id": "x", "adresse": "Test" },
+    {
+      "id": "x",
+      "adresse": "Test",
+      "status": "offen",
+      "kalenderwoche": 0
+    },
+    {
+      "id": "x",
+      "adresse": "Test",
+      "status": "offen",
+      "extraField": "not allowed"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Dokumentationsstatus",
+  "title": "Dokumentationsstatus",
+  "description": "Documentation/proof completeness state for an Auftrag. Derived from the boolean flags (erledigt, zielErreicht, synchronisiert) in disposition-web-app/AuftragDetail. Introduced as explicit enum in Phase 1.",
+  "type": "string",
+  "enum": [
+    "unvollstaendig",
+    "in_pruefung",
+    "vollstaendig",
+    "abgelehnt"
+  ]
+}

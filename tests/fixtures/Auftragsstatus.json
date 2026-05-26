@@ -1,0 +1,5 @@
+{
+  "schema": "Auftragsstatus",
+  "valid": ["offen", "geplant", "in_arbeit", "abgeschlossen"],
+  "invalid": ["OFFEN", "completed", "", null, 1]
+}

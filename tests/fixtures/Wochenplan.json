@@ -1,0 +1,71 @@
+{
+  "schema": "Wochenplan",
+  "valid": [
+    {
+      "id": "wp-001",
+      "monteurId": "monteur-01",
+      "kalenderwoche": 22,
+      "jahr": 2026,
+      "tag": "Montag",
+      "auftragIds": []
+    },
+    {
+      "id": "wp-002",
+      "monteurId": "monteur-01",
+      "monteurName": "Max Mustermann",
+      "kalenderwoche": 22,
+      "jahr": 2026,
+      "tag": "Dienstag",
+      "wechseldatum": "2026-05-27",
+      "auftragIds": ["auftrag-001", "auftrag-002"],
+      "streckenKm": "42.50",
+      "zeitMin": 180,
+      "status": "geplant",
+      "erstelltAm": "2026-05-20T07:00:00.000Z"
+    },
+    {
+      "id": "wp-003",
+      "monteurId": "monteur-01",
+      "kalenderwoche": 22,
+      "jahr": 2026,
+      "tag": "Mittwoch",
+      "auftragIds": ["auftrag-003"],
+      "streckenKm": 15.2,
+      "status": "aktiv",
+      "gestartetAm": "2026-05-28T07:30:00.000Z"
+    }
+  ],
+  "invalid": [
+    {
+      "id": "wp-x",
+      "monteurId": "m",
+      "kalenderwoche": 22,
+      "jahr": 2026,
+      "tag": "Samstag",
+      "auftragIds": []
+    },
+    {
+      "id": "wp-x",
+      "monteurId": "m",
+      "kalenderwoche": 0,
+      "jahr": 2026,
+      "tag": "Montag",
+      "auftragIds": []
+    },
+    {
+      "id": "wp-x",
+      "monteurId": "m",
+      "kalenderwoche": 22,
+      "jahr": 2023,
+      "tag": "Montag",
+      "auftragIds": []
+    },
+    {
+      "monteurId": "m",
+      "kalenderwoche": 22,
+      "jahr": 2026,
+      "tag": "Montag",
+      "auftragIds": []
+    }
+  ]
+}

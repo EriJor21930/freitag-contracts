@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Wochenplan",
+  "title": "Wochenplan",
+  "description": "Weekly schedule of a Monteur. References Aufträge by id; embeds optional execution metadata (started/paused/finished) when available.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "monteurId", "kalenderwoche", "jahr", "tag", "auftragIds"],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "monteurId": {
+      "type": "string"
+    },
+    "monteurName": {
+      "type": ["string", "null"],
+      "description": "Denormalized name copy for offline display in disposition-web-app. Source of truth: Monteur.name."
+    },
+    "kalenderwoche": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 53
+    },
+    "jahr": {
+      "type": "integer",
+      "minimum": 2024,
+      "maximum": 2100
+    },
+    "tag": {
+      "type": "string",
+      "enum": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"]
+    },
+    "wechseldatum": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Concrete calendar date for this weekday. Can be derived from kalenderwoche + jahr + tag; persisted by disposition for offline use."
+    },
+    "auftragIds": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Ordered list of Auftrag.id values planned for this day."
+    },
+    "streckenKm": {
+      "type": ["number", "string", "null"],
+      "description": "Route length (Postgres-Drizzle stores as decimal-string)."
+    },
+    "zeitMin": {
+      "type": ["integer", "null"]
+    },
+    "routeGeojson": {
+      "type": ["string", "null"],
+      "description": "Optional pre-computed route geometry. Only freitag-webapp produces this."
+    },
+    "status": {
+      "type": ["string", "null"],
+      "enum": ["geplant", "aktiv", "pausiert", "abgeschlossen", null],
+      "description": "Execution status. Only disposition-web-app tracks this; freitag-webapp leaves it null."
+    },
+    "gestartetAm": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "beendetAm": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "pausiertAm": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "erstelltAm": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    }
+  }
+}
