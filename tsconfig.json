@@ -1,19 +1,23 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
     "strict": true,
-    "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "rootDir": "gen/typescript"
   },
   "include": [
-    "gen/typescript/**/*.ts",
-    "tests/**/*.ts"
-  ]
+    "gen/typescript/**/*.ts"
+  ],
+  "exclude": ["tests", "node_modules", "dist"]
 }

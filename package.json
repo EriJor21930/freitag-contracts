@@ -8,27 +8,30 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
+    "build": "tsc -p tsconfig.json",
     "build:csharp": "echo 'C# codegen runs via dotnet tool nswag — see scripts/gen-csharp.ps1'",
-    "lint": "tsc --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "prepare": "npm run build",
     "changeset": "changeset",
     "version": "changeset version",
     "release": "changeset publish"
   },
-  "main": "gen/typescript/types/index.ts",
+  "main": "dist/types/index.js",
+  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./gen/typescript/types/index.ts",
-      "default": "./gen/typescript/types/index.ts"
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/types/index.js"
     },
     "./zod": {
-      "types": "./gen/typescript/zod/index.ts",
-      "default": "./gen/typescript/zod/index.ts"
+      "types": "./dist/zod/index.d.ts",
+      "default": "./dist/zod/index.js"
     },
     "./schemas/*.json": "./schemas/*.json"
   },
   "files": [
     "schemas",
-    "gen/typescript",
+    "dist",
     "README.md"
   ],
   "devDependencies": {
