@@ -1,0 +1,12 @@
+node_modules/
+*.log
+.DS_Store
+dist/
+
+# C# build artifacts
+gen/csharp/bin/
+gen/csharp/obj/
+
+# Local env
+.env
+.env.local

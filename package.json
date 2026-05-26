@@ -1,0 +1,48 @@
+{
+  "name": "@freitag/contracts",
+  "version": "0.1.0",
+  "description": "Shared domain contracts (JSON Schema + Zod + C# Records) for the Freitag Elektrobau testline",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:csharp": "echo 'C# codegen runs via dotnet tool nswag — see scripts/gen-csharp.ps1'",
+    "lint": "tsc --noEmit",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
+  },
+  "main": "gen/typescript/types/index.ts",
+  "exports": {
+    ".": {
+      "types": "./gen/typescript/types/index.ts",
+      "default": "./gen/typescript/types/index.ts"
+    },
+    "./zod": {
+      "types": "./gen/typescript/zod/index.ts",
+      "default": "./gen/typescript/zod/index.ts"
+    },
+    "./schemas/*.json": "./schemas/*.json"
+  },
+  "files": [
+    "schemas",
+    "gen/typescript",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0",
+    "@types/node": "^22.0.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "zod": "^3.23.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
