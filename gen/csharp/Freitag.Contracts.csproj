@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>1591</NoWarn>
+
+    <!-- NuGet packaging -->
+    <PackageId>Freitag.Contracts</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Freitag Elektrobau</Authors>
+    <Description>Shared domain contracts (records + enums) for the Freitag testline, generated from JSON Schema.</Description>
+    <RepositoryUrl>https://github.com/erikjordan/freitag-contracts</RepositoryUrl>
+    <PackageLicenseExpression>UNLICENSED</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- System.Text.Json native [JsonPolymorphic] is available since .NET 7; no extra deps needed. -->
+  </ItemGroup>
+
+</Project>
