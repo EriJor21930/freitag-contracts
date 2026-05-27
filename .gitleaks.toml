@@ -1,0 +1,26 @@
+# Phase 0 (applied retroactively to freitag-contracts in Wave 4):
+# detect leaked Cosmos / Atlas connection strings before they hit git.
+title = "Freitag Elektrobau secret rules"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "freitag-cosmos-mongodb-connection-string"
+description = "Cosmos DB MongoDB API connection string with embedded credentials"
+regex = '''mongodb\+srv://[^:]+:[^@]+@[^/]+\.mongocluster\.cosmos\.azure\.com'''
+tags = ["cosmos", "secret"]
+
+[[rules]]
+id = "freitag-atlas-mongodb-connection-string"
+description = "MongoDB Atlas connection string with embedded credentials"
+regex = '''mongodb\+srv://[^:]+:[^@]+@[^/]+\.mongodb\.net'''
+tags = ["atlas", "secret"]
+
+[allowlist]
+paths = [
+  '''node_modules/''',
+  '''dist/''',
+  '''gen/csharp/bin/''',
+  '''gen/csharp/obj/''',
+]

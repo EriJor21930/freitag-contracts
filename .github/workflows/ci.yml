@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  push:
+    branches: [Test, main]
+  pull_request:
+    branches: [Test, main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write   # for gitleaks SARIF upload
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # gitleaks needs full history
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - run: npm ci
+
+      - name: TypeScript build
+        run: npm run build
+
+      - name: Round-trip contract test (ajv ↔ Zod)
+        run: npm test
+
+      - name: C# build (Freitag.Contracts NuGet package)
+        run: dotnet build gen/csharp/Freitag.Contracts.csproj --configuration Release
+
+      - name: Gitleaks scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
